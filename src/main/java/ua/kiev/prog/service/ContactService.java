@@ -22,6 +22,10 @@ public class ContactService {
 
     @Transactional
     public void deleteGroup(long id) {
+        if(id == -1) {
+            System.err.println("Wrong");
+            return;
+        }
         List<Contact> contactList = groupRepository.findById(id).get().getContacts();
         for (Contact contact : contactList
         ) {

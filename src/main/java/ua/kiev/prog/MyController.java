@@ -109,7 +109,7 @@ public class MyController {
         if (group != null) {
             contactService.deleteGroup(groupId);
         } else {
-            System.err.println("This group is set by default");
+            contactService.deleteGroup(DEFAULT_GROUP_ID);
         }
         return "redirect:/";
     }
