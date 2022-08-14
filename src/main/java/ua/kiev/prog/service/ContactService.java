@@ -24,6 +24,13 @@ public class ContactService {
     public void deleteGroup(long id) {
         if(id == -1) {
             System.err.println("Wrong");
+            List<Contact> contactList = contactRepository.findAll();
+            for (Contact contact: contactList
+                 ) {
+                if (contact.getGroup() == null) {
+                    contactRepository.delete(contact);
+                }
+            }
             return;
         }
         List<Contact> contactList = groupRepository.findById(id).get().getContacts();
