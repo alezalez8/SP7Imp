@@ -103,9 +103,14 @@ public class MyController {
         return "group_delete_page";
     }
 
-    @PostMapping("/group/delete")
-    public String deleteGroup(@RequestParam(value = "group") long groupId){
-        contactService.deleteGroup(groupId);
+     @PostMapping("/group/delete")
+    public String deleteGroup(@RequestParam(value = "group", required = false) Long groupId) {
+        Group group = (groupId != DEFAULT_GROUP_ID) ? contactService.findGroup(groupId) : null;
+        if (group != null) {
+            contactService.deleteGroup(groupId);
+        } else {
+            System.err.println("This group is set by default");
+        }
         return "redirect:/";
     }
 
